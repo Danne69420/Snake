@@ -65,6 +65,7 @@ namespace Snake
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // Snake aids
             label1.Left++;
             
         }
