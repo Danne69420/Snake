@@ -12,13 +12,14 @@ namespace Snake
 {
     public partial class GameScreen : Form
     {
-        Timer timer = new Timer();
+        Timer timer = new Timer();      //New instance of the timer class
+        private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
         public GameScreen()
         {
             InitializeComponent();
             timer.Enabled = true;
-            timer.Interval = 1000;  /* 1000 millisec */
-            timer.Tick += new EventHandler(timer1_Tick);
+            timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
+            timer.Tick += new EventHandler(timer1_Tick);    //Every time the timer ticks it calls timer1_tick. The eventhandler method is requered to call  Windows forms events
         }
 
         
@@ -37,9 +38,9 @@ namespace Snake
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            label1.Width = 10;
+            label1.Width = 10;                  //when GameScreen loads a 10 by 10 label is created
             label1.Height = 10;
-            label1.BackColor = Color.Black;
+            label1.BackColor = Color.Black;     //The labels color is set to black, creating a black square
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -53,8 +54,7 @@ namespace Snake
             
         }
 
-          private  Coordinates coordinates = new Coordinates();
-        private void OnPaint(object sender, PaintEventArgs e)
+        private void OnPaint(object sender, PaintEventArgs e)       //Old code that doesn't work. I still have hope that it could work sometime in the future.
         {
             //Graphics g = e.Graphics;
             //// Create solid brush.
