@@ -94,13 +94,15 @@ namespace Snake
             //base.OnPaint(e);
         }
 
-        private void TimerCallback(object sender, EventArgs e)
-        {
-            coordinates.X += 10;
-            coordinates.Y += 10;
-            this.Invalidate();
-            return;
-        }
+       
+
+        //private void TimerCallback(object sender, EventArgs e) //Does not currently do anything. 
+        //{
+        //    coordinates.X += 10;
+        //    coordinates.Y += 10;
+        //    this.Invalidate();
+        //    return;
+        //}
     }
 
 }
