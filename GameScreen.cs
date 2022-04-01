@@ -23,23 +23,6 @@ namespace Snake
 
         
 
-        private void UpdateGraphics(object sender, PaintEventArgs e)
-        {
-            //// Create solid brush.
-            //SolidBrush blackBrush = new SolidBrush(Color.Black);
-            //Coordinates coordinates = new Coordinates();
-            //// Create location and size of rectangle.
-            //int x = coordinates.X;
-            //int y = coordinates.Y;
-            //int width = 12;
-            //int height = 12;
-
-            //coordinates.X += 15;
-            //coordinates.Y += 15;
-
-            //// Fill rectangle to screen.
-            //e.Graphics.FillRectangle(blackBrush, x, y, width, height);
-        }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -51,10 +34,6 @@ namespace Snake
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
