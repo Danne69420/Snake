@@ -3,7 +3,7 @@ using System.Timers;
 using System.Drawing;
     class Coordinates
     {
-    private int x = 50;
+    private int x = 0;
         public int X 
         {
             get { return x; } set { x = value; }

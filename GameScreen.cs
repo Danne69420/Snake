@@ -17,7 +17,7 @@ namespace Snake
         {
             InitializeComponent();
             timer.Enabled = true;
-            timer.Interval = 100;  /* 100 millisec */
+            timer.Interval = 1000;  /* 1000 millisec */
             timer.Tick += new EventHandler(timer1_Tick);
         }
 
@@ -65,29 +65,33 @@ namespace Snake
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Snake aids
-            label1.Left++;
+            // Sort of works. This code executes everytime the timer ticks (currently every 1000 ms)
+            coordinates.X += 10;        //ten is added to the x coordinate
+            coordinates.Y += 10;        //ten is added to the y coordinate
+
+            label1.Left = coordinates.X;    //Left edge of the label is set to the x coordinate
+            label1.Top = coordinates.Y;     //tob edge of the label is set to the y coordinate
             
         }
 
           private  Coordinates coordinates = new Coordinates();
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            // Create solid brush.
-            SolidBrush blackBrush = new SolidBrush(Color.Black);
-            // Create location and size of rectangle.
-            int x = coordinates.X;
-            int y = coordinates.Y;
-            int width = 12;
-            int height = 12;
+            //Graphics g = e.Graphics;
+            //// Create solid brush.
+            //SolidBrush blackBrush = new SolidBrush(Color.Black);
+            //// Create location and size of rectangle.
+            //int x = coordinates.X;
+            //int y = coordinates.Y;
+            //int width = 12;
+            //int height = 12;
 
-            coordinates.X += 15;
-            coordinates.Y += 15;
+            //coordinates.X += 15;
+            //coordinates.Y += 15;
 
-            // Fill rectangle to screen.
-            g.FillRectangle(blackBrush, x, y, width, height);
-            base.OnPaint(e);
+            //// Fill rectangle to screen.
+            //g.FillRectangle(blackBrush, x, y, width, height);
+            //base.OnPaint(e);
         }
 
         private void TimerCallback(object sender, EventArgs e)
