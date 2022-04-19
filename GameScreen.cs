@@ -14,11 +14,12 @@ namespace Snake
     {
         Timer timer = new Timer();      //New instance of the timer class
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
+        
         public GameScreen()
         {
             InitializeComponent();
             timer.Enabled = true;
-            timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
+            timer.Interval = 10;  /* 1000 millisec */     //Timer ticks every 1000 ms
             timer.Tick += new EventHandler(timer1_Tick);    //Every time the timer ticks it calls timer1_tick. The eventhandler method is requered to call  Windows forms events
         }
 
@@ -42,15 +43,23 @@ namespace Snake
             label1.Height = 10;
             label1.BackColor = Color.Black;     //The labels color is set to black, creating a black square
         }
-
+        private int timesTicked;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Sort of works. This code executes everytime the timer ticks (currently every 1000 ms)
-            coordinates.X += 10;        //ten is added to the x coordinate
-            coordinates.Y += 10;        //ten is added to the y coordinate
 
-            label1.Left = coordinates.X;    //Left edge of the label is set to the x coordinate
-            label1.Top = coordinates.Y;     //tob edge of the label is set to the y coordinate
+            if (timesTicked%1 == 0)
+            {
+
+                
+
+                // Sort of works. This code executes everytime the timer ticks (currently every 1000 ms)
+                coordinates.X += 0;        //ten is added to the x coordinate
+                coordinates.Y += 1;        //ten is added to the y coordinate
+
+                label1.Left = coordinates.X;    //Left edge of the label is set to the x coordinate
+                label1.Top = coordinates.Y;     //tob edge of the label is set to the y coordinate
+            }
+            timesTicked++;
             
         }
 
@@ -75,7 +84,7 @@ namespace Snake
 
        
 
-        //private void TimerCallback(object sender, EventArgs e) //Does not currently do anything. 
+        //private void TimerCallback(object sender, EventArgs e) //I'm not sure if this does anything
         //{
         //    coordinates.X += 10;
         //    coordinates.Y += 10;
