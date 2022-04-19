@@ -47,9 +47,18 @@ namespace Snake
 
         }
         private int timesTicked;                //keeps track of how many times the timer has ticked
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)    //For some reason this seems to tick twice every other tick
         {
-            pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
+            if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
+            {
+
+
+                pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
+            }
+            else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
+            {
+                pictureBox1.Invalidate();
+            }
             timesTicked++;
         }
 
@@ -62,14 +71,14 @@ namespace Snake
             // Create location and size of rectangle.
             int x = coordinates.X;
             int y = coordinates.Y;
-            int width = 12;
-            int height = 12;
+            int width = 15;
+            int height = 15;
 
             coordinates.X += 0;
             coordinates.Y += 15;
 
             // Fill rectangle to screen.
-            g.FillRectangle(blackBrush, x, y, width, height);
+            g.FillEllipse(blackBrush, x, y, width, height);
 
 
         }
