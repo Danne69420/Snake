@@ -14,6 +14,12 @@ namespace Snake
     {
         Timer timer = new Timer();      //New instance of the timer class
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
+
+        bool MovingLeft;
+        bool MovingRight;
+        bool MovingUp;
+        bool MovingDown;
+
         public GameScreen()
         {
             InitializeComponent();
@@ -38,50 +44,38 @@ namespace Snake
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
-            label1.Width = 10;                  //when GameScreen loads a 10 by 10 label is created
-            label1.Height = 10;
-            label1.BackColor = Color.Black;     //The labels color is set to black, creating a black square
-        }
 
+        }
+        private int timesTicked;                //keeps track of how many times the timer has ticked
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Sort of works. This code executes everytime the timer ticks (currently every 1000 ms)
-            coordinates.X += 10;        //ten is added to the x coordinate
-            coordinates.Y += 10;        //ten is added to the y coordinate
-
-            label1.Left = coordinates.X;    //Left edge of the label is set to the x coordinate
-            label1.Top = coordinates.Y;     //tob edge of the label is set to the y coordinate
-            
+            pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
+            timesTicked++;
         }
 
-        private void OnPaint(object sender, PaintEventArgs e)       //Old code that doesn't work. I still have hope that it could work sometime in the future.
+
+        private void updateScreen(object sender, PaintEventArgs e)          //finally got this bullshit to work. Turns out you have to use a picturebox to display the graphics and .Invalidate to update.
         {
-            //Graphics g = e.Graphics;
-            //// Create solid brush.
-            //SolidBrush blackBrush = new SolidBrush(Color.Black);
-            //// Create location and size of rectangle.
-            //int x = coordinates.X;
-            //int y = coordinates.Y;
-            //int width = 12;
-            //int height = 12;
+            Graphics g = e.Graphics;
+            // Create solid brush.
+            SolidBrush blackBrush = new SolidBrush(Color.Black);
+            // Create location and size of rectangle.
+            int x = coordinates.X;
+            int y = coordinates.Y;
+            int width = 12;
+            int height = 12;
 
-            //coordinates.X += 15;
-            //coordinates.Y += 15;
+            coordinates.X += 0;
+            coordinates.Y += 15;
 
-            //// Fill rectangle to screen.
-            //g.FillRectangle(blackBrush, x, y, width, height);
-            //base.OnPaint(e);
+            // Fill rectangle to screen.
+            g.FillRectangle(blackBrush, x, y, width, height);
+
+
         }
 
-       
 
-        //private void TimerCallback(object sender, EventArgs e) //Does not currently do anything. 
-        //{
-        //    coordinates.X += 10;
-        //    coordinates.Y += 10;
-        //    this.Invalidate();
-        //    return;
-        //}
+
     }
 
 }
