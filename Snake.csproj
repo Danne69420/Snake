@@ -54,6 +54,7 @@
     <Compile Include="GameScreen.Designer.cs">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Input.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>

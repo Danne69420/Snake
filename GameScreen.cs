@@ -33,12 +33,12 @@ namespace Snake
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-
+                Input.ChangeState(e.KeyCode, true);
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
-
+            Input.ChangeState(e.KeyCode, false);
         }
 
 
@@ -51,13 +51,20 @@ namespace Snake
         {
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
-
+                if (Input.KeyPress(Keys.Right))
+                {
+                    MovingRight = true;
+                }
 
                 pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
             }
             else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
             {
-                pictureBox1.Invalidate();
+                if (Input.KeyPress(Keys.Right))
+                {
+                    MovingRight = true;
+                }
+                    pictureBox1.Invalidate();
             }
             timesTicked++;
         }
@@ -74,9 +81,16 @@ namespace Snake
             int width = 15;
             int height = 15;
 
-            coordinates.X += 0;
-            coordinates.Y += 15;
-
+            if (MovingDown)
+            {
+                coordinates.X += 0;
+                coordinates.Y += 15;
+            }
+            if (MovingRight)
+            {
+                coordinates.X += 15;
+                coordinates.Y += 0;
+            }
             // Fill rectangle to screen.
             g.FillEllipse(blackBrush, x, y, width, height);
 
