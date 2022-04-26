@@ -51,20 +51,42 @@ namespace Snake
         {
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
-                if (Input.KeyPress(Keys.Right))
+                if (Input.KeyPress(Keys.Right) && MovingRight != true)     //If the right arrow key is pressed
                 {
-                    MovingRight = true;
+                    MovingRight = true;         //MovingRight is true. 
                 }
-
+                if(Input.KeyPress(Keys.Left) && MovingLeft != true)
+                {
+                    MovingLeft = true;
+                }
+                if(Input.KeyPress(Keys.Up)&& MovingUp != true)
+                {
+                    MovingUp = true;
+                }
+                if(Input.KeyPress(Keys.Down)&& MovingDown != true)
+                {
+                    MovingDown = true;
+                }
                 pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
             }
             else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
             {
-                if (Input.KeyPress(Keys.Right))
+                if (Input.KeyPress(Keys.Right) && MovingRight != true)     //If the right arrow key is pressed
                 {
-                    MovingRight = true;
+                    MovingRight = true;         //MovingRight is true. 
                 }
-                    pictureBox1.Invalidate();
+                if (Input.KeyPress(Keys.Left) && MovingLeft != true)
+                {
+                    MovingLeft = true;
+                }
+                if (Input.KeyPress(Keys.Up) && MovingUp != true)
+                {
+                    MovingUp = true;
+                }
+                if (Input.KeyPress(Keys.Down) && MovingDown != true)
+                {
+                    MovingDown = true;
+                }
             }
             timesTicked++;
         }
