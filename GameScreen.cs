@@ -15,11 +15,15 @@ namespace Snake
         Timer timer = new Timer();      //New instance of the timer class
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
 
-        bool MovingLeft;
-        bool MovingRight;
-        bool MovingUp;
-        bool MovingDown;
 
+        enum Directions         //This is an enumerator variabel. It works sort of like a class. First i declare what values the enum can have. 
+        {
+            Left,
+            Right,
+            Up,
+            Down,
+        }
+        Directions direction = Directions.Down;         //Then i make an object. The default direction is down. 
         public GameScreen()
         {
             InitializeComponent();
@@ -51,42 +55,43 @@ namespace Snake
         {
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
-                if (Input.KeyPress(Keys.Right) && MovingRight != true)     //If the right arrow key is pressed
+                if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
                 {
-                    MovingRight = true;         //MovingRight is true. 
+                    direction = Directions.Right;
                 }
-                if(Input.KeyPress(Keys.Left) && MovingLeft != true)
+                if(Input.KeyPress(Keys.Left) && direction != Directions.Right)
                 {
-                    MovingLeft = true;
+                    direction = Directions.Left;
                 }
-                if(Input.KeyPress(Keys.Up)&& MovingUp != true)
+                if(Input.KeyPress(Keys.Up)&& direction != Directions.Down)
                 {
-                    MovingUp = true;
+                    direction = Directions.Up;
                 }
-                if(Input.KeyPress(Keys.Down)&& MovingDown != true)
+                if(Input.KeyPress(Keys.Down)&& direction != Directions.Up)
                 {
-                    MovingDown = true;
+                    direction = Directions.Down;
                 }
                 pictureBox1.Invalidate();           //refreshes the graphics shown in the picturebox
             }
             else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
             {
-                if (Input.KeyPress(Keys.Right) && MovingRight != true)     //If the right arrow key is pressed
+                if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
                 {
-                    MovingRight = true;         //MovingRight is true. 
+                    direction = Directions.Right;
                 }
-                if (Input.KeyPress(Keys.Left) && MovingLeft != true)
+                if (Input.KeyPress(Keys.Left) && direction != Directions.Right)
                 {
-                    MovingLeft = true;
+                    direction = Directions.Left;
                 }
-                if (Input.KeyPress(Keys.Up) && MovingUp != true)
+                if (Input.KeyPress(Keys.Up) && direction != Directions.Down)
                 {
-                    MovingUp = true;
+                    direction = Directions.Up;
                 }
-                if (Input.KeyPress(Keys.Down) && MovingDown != true)
+                if (Input.KeyPress(Keys.Down) && direction != Directions.Up)
                 {
-                    MovingDown = true;
+                    direction = Directions.Down;
                 }
+                pictureBox1.Invalidate();
             }
             timesTicked++;
         }
@@ -103,16 +108,22 @@ namespace Snake
             int width = 15;
             int height = 15;
 
-            if (MovingDown)
+            switch (direction)
             {
-                coordinates.X += 0;
-                coordinates.Y += 15;
+                case Directions.Down:
+                    coordinates.Y += 15;
+                    break;
+                case Directions.Up:
+                    coordinates.Y -= 15;
+                    break;
+                case Directions.Right:
+                    coordinates.X += 15;
+                    break;
+                case Directions.Left:
+                    coordinates.X -= 15;
+                    break;
             }
-            if (MovingRight)
-            {
-                coordinates.X += 15;
-                coordinates.Y += 0;
-            }
+
             // Fill rectangle to screen.
             g.FillEllipse(blackBrush, x, y, width, height);
 
