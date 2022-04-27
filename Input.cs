@@ -11,7 +11,7 @@ namespace Snake
     class Input             //This class reads the users keyboard input. Somehow.
     {
         private static Hashtable keyTable = new Hashtable();        //This is supposed to be the most efficient way to do this. Problem is i dont really understand how it works.
-        public static bool KeyPress (Keys key)
+        public static bool KeyPress (Keys key)          //This reads the keyboard input. 
         {
             if (keyTable[key] == null)
             {
@@ -19,7 +19,7 @@ namespace Snake
             }
             return (bool)keyTable[key];
         }
-        public static void ChangeState(Keys key, bool state)
+        public static void ChangeState(Keys key, bool state)        //No clue what this does yet 
         {
             keyTable[key] = state;
         }
