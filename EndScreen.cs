@@ -17,14 +17,14 @@ namespace Snake
             InitializeComponent();
         }
 
-        private void PlayAgain_Click(object sender, EventArgs e)
+        private void PlayAgain_Click(object sender, EventArgs e)        //Hides the end screen and starts the game again
         {
             Snake.GameScreen SnakeOperator = new Snake.GameScreen();
             this.Hide();
             SnakeOperator.Show();
         }
 
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void ExitButton_Click(object sender, EventArgs e)           //Closes the application
         {
             Application.Exit();
         }

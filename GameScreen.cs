@@ -16,7 +16,8 @@ namespace Snake
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
 
         bool EndSCreenShowing = false;
-
+        //List<int> snakeParts = new List<int>();
+        int SnakeParts = 1;
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
             Left,
@@ -30,7 +31,8 @@ namespace Snake
             InitializeComponent();
             timer.Enabled = true;
             timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
-
+            FoodX = coordinates.GenerateFoodX();
+            FoodY = coordinates.GenerateFoodY();
             timer.Tick += new EventHandler(timer1_Tick);    //Every time the timer ticks it calls timer1_tick. The eventhandler method is requered to call  Windows forms events
         }
 
@@ -64,7 +66,10 @@ namespace Snake
                 this.Hide();
                 Die();      //You die
             }
-
+            if(coordinates.X == FoodX && coordinates.Y == FoodY)
+            {
+                EatFood();
+            }
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
                 if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
@@ -108,7 +113,8 @@ namespace Snake
             timesTicked++;
         }
 
-
+        int FoodX;          //These variables are used to spawn food
+        int FoodY;
         private void updateScreen(object sender, PaintEventArgs e)          //finally got this bullshit to work. Turns out you have to use a picturebox to display the graphics and .Invalidate to update.
         {
 
@@ -118,24 +124,34 @@ namespace Snake
             // Create location and size of rectangle.
             int x = coordinates.X;          //x and y are set to the current coordinates
             int y = coordinates.Y;
-            int width = 15;
-            int height = 15;
+            int width = 18;
+            int height = 18;
             // Fill rectangle to screen.
+
+            for (int i = 0; i < SnakeParts; i++)
+            {
             g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
+
+            }
+
+
+            SolidBrush redBrush = new SolidBrush(Color.Red);
+            g.FillEllipse(redBrush, FoodX, FoodY, width, height);
+            
 
             switch (direction)          //Depending on which direction the snake is moving the coordinates are updated differently
             {
                 case Directions.Down:
-                    coordinates.Y += 15;
+                    coordinates.Y += 20;
                     break;
                 case Directions.Up:
-                    coordinates.Y -= 15;
+                    coordinates.Y -= 20;
                     break;
                 case Directions.Right:
-                    coordinates.X += 15;
+                    coordinates.X += 20;
                     break;
                 case Directions.Left:
-                    coordinates.X -= 15;
+                    coordinates.X -= 20;
                     break;
             }
 
@@ -143,14 +159,14 @@ namespace Snake
 
 
         }
-        void Die()
+        void Die()          //This shows the end screen. 
         {
-            if (EndSCreenShowing == false)          //THis is a stupid workaaround but it works. If i dont do this the code below keeps repeating. 
+            if (EndSCreenShowing == false)          //THis is a stupid workaround but it works. If i dont do this the code below keeps repeating. 
             {
 
 
 
-                Snake.EndScreen EndSCreenOperator = new Snake.EndScreen();      //This shows the end screen. 
+                Snake.EndScreen EndSCreenOperator = new Snake.EndScreen();      
 
                 EndSCreenOperator.Show();
                 EndSCreenShowing = true;
