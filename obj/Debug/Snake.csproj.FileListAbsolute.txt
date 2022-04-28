@@ -9,3 +9,4 @@ C:\Users\daniel.kindvall\source\repos\Projekt_2\Snake\obj\Debug\Snake.csproj.Cor
 C:\Users\daniel.kindvall\source\repos\Projekt_2\Snake\obj\Debug\Snake.exe
 C:\Users\daniel.kindvall\source\repos\Projekt_2\Snake\obj\Debug\Snake.pdb
 C:\Users\daniel.kindvall\source\repos\Projekt_2\Snake\obj\Debug\Snake.GameScreen.resources
+C:\Users\daniel.kindvall\source\repos\Projekt_2\Snake\obj\Debug\Snake.EndScreen.resources

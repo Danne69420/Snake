@@ -15,6 +15,7 @@ namespace Snake
         Timer timer = new Timer();      //New instance of the timer class
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
 
+        bool EndSCreenShowing = false;
 
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
@@ -57,6 +58,13 @@ namespace Snake
         //IDEA: Right now the program only reads input at the exact moment the timer ticks. A possible fix could be to have a seperate timer ticking very frequently read the input while using this timer to still only update the graphics every second.
         private void timer1_Tick(object sender, EventArgs e)    //For some reason this seems to tick twice every other tick
         {
+
+            if(coordinates.X < 0 | coordinates.X > pictureBox1.Width | coordinates.Y < 0 | coordinates.Y > pictureBox1.Height)          //If you touch the wall
+            {
+                this.Hide();
+                Die();      //You die
+            }
+
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
                 if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
@@ -103,6 +111,7 @@ namespace Snake
 
         private void updateScreen(object sender, PaintEventArgs e)          //finally got this bullshit to work. Turns out you have to use a picturebox to display the graphics and .Invalidate to update.
         {
+
             Graphics g = e.Graphics;
             // Create solid brush.
             SolidBrush blackBrush = new SolidBrush(Color.Black);
@@ -132,9 +141,21 @@ namespace Snake
 
 
 
+
         }
+        void Die()
+        {
+            if (EndSCreenShowing == false)          //THis is a stupid workaaround but it works. If i dont do this the code below keeps repeating. 
+            {
 
 
+
+                Snake.EndScreen EndSCreenOperator = new Snake.EndScreen();      //This shows the end screen. 
+
+                EndSCreenOperator.Show();
+                EndSCreenShowing = true;
+            }
+        }
 
     }
 
