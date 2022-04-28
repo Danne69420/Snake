@@ -8,18 +8,18 @@ using System.Collections;
 using System.Windows.Forms;
 namespace Snake
 {
-    class Input             //This class reads the users keyboard input. Somehow.
+    class Input             //This class reads the users keyboard input.
     {
-        private static Hashtable keyTable = new Hashtable();        //This is supposed to be the most efficient way to do this. Problem is i dont really understand how it works.
-        public static bool KeyPress (Keys key)          //This reads the keyboard input. 
+        private static Hashtable keyTable = new Hashtable();        //A hashtable is a table of codes which each have a corresponding value
+        public static bool KeyPress (Keys key)          //In this case the hashtable uses the codes for the keys on the keyboard
         {
-            if (keyTable[key] == null)
+            if (keyTable[key] == null)          //This is a failsafe. In case the method recieves a key that does not have a value it simply returns false. 
             {
                 return false;
             }
-            return (bool)keyTable[key];
+            return (bool)keyTable[key];             //This return wether the keys value is true or false, pressed or not. 
         }
-        public static void ChangeState(Keys key, bool state)        //No clue what this does yet 
+        public static void ChangeState(Keys key, bool state)        //This changes the hashtable values whenever a key is pressed. 
         {
             keyTable[key] = state;
         }

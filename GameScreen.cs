@@ -39,14 +39,14 @@ namespace Snake
         
 
 
-        private void KeyIsDown(object sender, KeyEventArgs e)
+        private void KeyIsDown(object sender, KeyEventArgs e)           //This gets triggered when a kay is pressed
         {
-                Input.ChangeState(e.KeyCode, true);
+                Input.ChangeState(e.KeyCode, true);             //This changes the hashtable to reflect that
         }
 
-        private void KeyIsUp(object sender, KeyEventArgs e)
+        private void KeyIsUp(object sender, KeyEventArgs e)     //This gets triggered when a key is released
         {
-            Input.ChangeState(e.KeyCode, false);
+            Input.ChangeState(e.KeyCode, false);            //This changes the hashtable to reflect that
         }
 
 
