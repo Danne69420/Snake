@@ -16,8 +16,9 @@ namespace Snake
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
 
         bool EndSCreenShowing = false;
-        //List<int> snakeParts = new List<int>();
+        //List<int> snakeParts = new List<int>();           //maybe making a list that contains all the parts of the snakes is a good idea. two might be needed, one for x coordinate and one for y. 
         int SnakeParts = 1;
+        bool FoodExists;
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
             Left,
@@ -31,8 +32,6 @@ namespace Snake
             InitializeComponent();
             timer.Enabled = true;
             timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
-            FoodX = coordinates.GenerateFoodX();
-            FoodY = coordinates.GenerateFoodY();
             timer.Tick += new EventHandler(timer1_Tick);    //Every time the timer ticks it calls timer1_tick. The eventhandler method is requered to call  Windows forms events
         }
 
@@ -66,12 +65,13 @@ namespace Snake
                 this.Hide();
                 Die();      //You die
             }
-            if(coordinates.X == FoodX && coordinates.Y == FoodY)
-            {
-                EatFood();
-            }
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
+                if (coordinates.X == FoodX && coordinates.Y == FoodY)
+                {
+                    EatFood();
+                }
+
                 if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
                 {
                     direction = Directions.Right;
@@ -92,6 +92,11 @@ namespace Snake
             }
             else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
             {
+                if (coordinates.X == FoodX && coordinates.Y == FoodY)
+                {
+                    EatFood();
+                }
+
                 if (Input.KeyPress(Keys.Right) && direction != Directions.Left)     //If the right arrow key is pressed
                 {
                     direction = Directions.Right;
@@ -110,6 +115,12 @@ namespace Snake
                 }
                 pictureBox1.Invalidate();
             }
+            if(FoodExists != true)
+            {
+                FoodX = coordinates.GenerateFoodX();
+                FoodY = coordinates.GenerateFoodY();
+                FoodExists = true;
+            }
             timesTicked++;
         }
 
@@ -127,12 +138,9 @@ namespace Snake
             int width = 18;
             int height = 18;
             // Fill rectangle to screen.
-
-            for (int i = 0; i < SnakeParts; i++)
-            {
             g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
 
-            }
+            
 
 
             SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -166,13 +174,17 @@ namespace Snake
 
 
 
-                Snake.EndScreen EndSCreenOperator = new Snake.EndScreen();      
+                Snake.EndScreen endSCreenOperator = new Snake.EndScreen();      
 
-                EndSCreenOperator.Show();
+                endSCreenOperator.Show();
                 EndSCreenShowing = true;
             }
         }
-
+        void EatFood()
+        {
+            //SnakeParts++;
+            FoodExists = false;
+        }
     }
 
 }
