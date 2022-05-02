@@ -16,8 +16,8 @@ namespace Snake
         private  Coordinates coordinates = new Coordinates(); //New instance of the coordinates class.
 
         bool EndSCreenShowing = false;
-        //List<int> snakeParts = new List<int>();           //maybe making a list that contains all the parts of the snakes is a good idea. two might be needed, one for x coordinate and one for y. 
-        int SnakeParts = 1;
+        List<int> snakePartsX = new List<int>();           //maybe making a list that contains all the parts of the snakes is a good idea. two might be needed, one for x coordinate and one for y. 
+        List<int> snakePartsY = new List<int>();   
         bool FoodExists;
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
@@ -30,6 +30,8 @@ namespace Snake
         public GameScreen()
         {
             InitializeComponent();
+            snakePartsX.Add(coordinates.X);
+            snakePartsY.Add(coordinates.Y);
             timer.Enabled = true;
             timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
             timer.Tick += new EventHandler(timer1_Tick);    //Every time the timer ticks it calls timer1_tick. The eventhandler method is requered to call  Windows forms events
@@ -138,7 +140,7 @@ namespace Snake
             int width = 18;
             int height = 18;
             // Fill rectangle to screen.
-            g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
+            //g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
 
             
 
@@ -163,7 +165,10 @@ namespace Snake
                     break;
             }
 
-
+            for(int i = 0; i < snakePartsX.Count; i++)
+            {
+                g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
+            }
 
 
         }
@@ -184,6 +189,8 @@ namespace Snake
         {
             //SnakeParts++;
             FoodExists = false;
+            snakePartsX.Add(coordinates.X);
+            snakePartsY.Add(coordinates.Y);
         }
     }
 
