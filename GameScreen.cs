@@ -59,9 +59,9 @@ namespace Snake
                 this.Hide();
                 Die();      //You die
             }
-            for (int i = coordinateList.Count - 1; i > 0; i--)
+            for (int i = coordinateList.Count - 1; i > 0; i--)      //checks for collision between the snakes head and parts
             {
-                if (i != 1)
+                if (i != 1)         //Because the part closest to the head has its coordinates set to be the same as the head after the graphics are drawn i ignore it when checking collision, or the player dies as soon as they eat. We can ignore it because this part will never touch the head because you cant move in the opposite direction. Probably a cleaner way to fix this.
                 {
 
 
@@ -137,20 +137,10 @@ namespace Snake
         {
 
             Graphics g = e.Graphics;
-            // Create solid brush.
-            SolidBrush blackBrush = new SolidBrush(Color.Black);
-            // Create location and size of rectangle.
-            //int x = coordinates.X;          //x and y are set to the current coordinates
-            //int y = coordinates.Y;
-            int width = 18;
-            int height = 18;
-            // Fill rectangle to screen.
-            //g.FillEllipse(blackBrush, x, y, width, height);         //A circle is drawn using the variables declared above
-
-            
-
-
+            SolidBrush blackBrush = new SolidBrush(Color.Black);        //Creates a brush
             SolidBrush redBrush = new SolidBrush(Color.Red);
+            int width = 18;                                             //Sets size of the circle
+            int height = 18;
             g.FillEllipse(redBrush, FoodX, FoodY, width, height);
 
             switch (direction)          //Depending on which direction the snake is moving the coordinates are updated differently. This only updates the coordinates of the head of the snake. 
