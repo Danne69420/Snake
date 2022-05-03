@@ -59,6 +59,19 @@ namespace Snake
                 this.Hide();
                 Die();      //You die
             }
+            for (int i = coordinateList.Count - 1; i > 0; i--)
+            {
+                if (i != 1)
+                {
+
+
+                    if (coordinateList[i].X == coordinateList[0].X && coordinateList[i].Y == coordinateList[0].Y)
+                    {
+                        this.Hide();
+                        Die();
+                    }
+                }
+            }
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
                 if (coordinateList[0].X == FoodX && coordinateList[0].Y == FoodY)
