@@ -12,6 +12,7 @@ namespace Snake
         bool EndSCreenShowing = false;
         bool FoodExists;
         List<Coordinates> coordinateList = new List<Coordinates>();
+        Food food = new Food();
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
             Left,
@@ -22,7 +23,11 @@ namespace Snake
         Directions direction = Directions.Down;         //Then i make an object. The default direction is down. 
         public GameScreen()
         {
+            direction = Directions.Down;
             InitializeComponent();
+            coordinateList.Add(new Coordinates());
+            coordinateList.Add(new Coordinates());
+            coordinateList.Add(new Coordinates());
             coordinateList.Add(new Coordinates());
             timer.Enabled = true;
             timer.Interval = 1000;  /* 1000 millisec */     //Timer ticks every 1000 ms
@@ -43,7 +48,7 @@ namespace Snake
         }
 
 
-        private void GameScreen_Load(object sender, EventArgs e)
+        private void GameScreen_Load(object sender, EventArgs e)            //This does nothing but when i remove it something in the windows forms designer breaks.
         {
 
         }
@@ -74,7 +79,7 @@ namespace Snake
             }
             if (timesTicked % 2 == 0)   //This makes it only do stuff every when timesTicked is evenly divisible by 2. this makes it skip every fourth tick however
             {
-                if (coordinateList[0].X == FoodX && coordinateList[0].Y == FoodY)
+                if (coordinateList[0].X == food.X && coordinateList[0].Y == food.Y)
                 {
                     EatFood();
                 }
@@ -99,7 +104,7 @@ namespace Snake
             }
             else if (timesTicked % 3 == 0)  //This fixes it skipping every fourth tick. 
             {
-                if (coordinateList[0].X == FoodX && coordinateList[0].Y == FoodY)
+                if (coordinateList[0].X == food.X && coordinateList[0].Y == food.Y)
                 {
                     EatFood();
                 }
@@ -124,15 +129,12 @@ namespace Snake
             }
             if(FoodExists != true)
             {
-                FoodX = coordinateList[0].GenerateFoodX();
-                FoodY = coordinateList[0].GenerateFoodY();
+                food.X = food.GenerateFoodX();
+                food.Y = food.GenerateFoodY();
                 FoodExists = true;
             }
             timesTicked++;
         }
-
-        int FoodX;          //These variables are used to spawn food
-        int FoodY;
         private void updateScreen(object sender, PaintEventArgs e)          //finally got this bullshit to work. Turns out you have to use a picturebox to display the graphics and .Invalidate to update.
         {
 
@@ -141,7 +143,7 @@ namespace Snake
             SolidBrush redBrush = new SolidBrush(Color.Red);
             int width = 18;                                             //Sets size of the circle
             int height = 18;
-            g.FillEllipse(redBrush, FoodX, FoodY, width, height);
+            g.FillEllipse(redBrush, food.X, food.Y, width, height);
 
             switch (direction)          //Depending on which direction the snake is moving the coordinates are updated differently. This only updates the coordinates of the head of the snake. 
             {
@@ -178,14 +180,12 @@ namespace Snake
                 EndSCreenShowing = true;
             }
         }
-        static int snakeLength = 1;         //When i tried to replace this with snakecoordinates.Count the program broke (outside of index, in EatFood)
         void EatFood()
         {
             FoodExists = false;
             coordinateList.Add(new Coordinates());                                      //A new part gets added to the snake
-            coordinateList[snakeLength].X = coordinateList[snakeLength - 1].X;          //the new parts coodinates are set to be the same as those of the fhurtest back part of the snake 
-            coordinateList[snakeLength].Y = coordinateList[snakeLength - 1].Y;
-            snakeLength++;            
+            coordinateList[coordinateList.Count - 1].X = coordinateList[coordinateList.Count - 2].X;          //the new parts coodinates are set to be the same as those of the fhurtest back part of the snake 
+            coordinateList[coordinateList.Count - 1].Y = coordinateList[coordinateList.Count - 2].Y;
         }
     }
 }
