@@ -11,7 +11,7 @@ namespace Snake
 
         bool EndSCreenShowing = false;
         bool FoodExists;
-        List<Coordinates> coordinateList = new List<Coordinates>();
+        List<Coordinates> coordinateList = new List<Coordinates>();             //A new list of objects of the Coordinates class. Every object van hold an x value and a y value. 
         Food food = new Food();
         enum Directions         //This is an enumerable variabel. It works sort of like a class. First i declare what values the enum can have. 
         {
@@ -23,8 +23,8 @@ namespace Snake
         Directions direction = Directions.Down;         //Then i make an object. The default direction is down. 
         public GameScreen()
         {
-            direction = Directions.Down;
             InitializeComponent();
+            direction = Directions.Down;
             coordinateList.Add(new Coordinates());
             coordinateList.Add(new Coordinates());
             coordinateList.Add(new Coordinates());
