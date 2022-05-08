@@ -8,25 +8,13 @@ namespace Projekt_2
     {
         static void Main(string[] args)
         {
-            Snake.Menu snakeOperator = new Snake.Menu();
-            //Snake.GameScreen gameOperator = new Snake.GameScreen();
+            Snake.Menu snakeOperator = new Snake.Menu();            //This starts the Menu form
             snakeOperator.Show();
             
             Application.Run();
 
 
             Application.Exit();
-        }
-    }
-    class Game
-    {
-        static void Run()
-        {
-
-        }
-        void Start()
-        {
-
         }
     }
 }

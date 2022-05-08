@@ -52,9 +52,8 @@ namespace Snake
         {
 
         }
+
         private int timesTicked;                //keeps track of how many times the timer has ticked
-
-
         //IDEA: Right now the program only reads input at the exact moment the timer ticks. A possible fix could be to have a seperate timer ticking very frequently read the input while using this timer to still only update the graphics every second.
         private void timer1_Tick(object sender, EventArgs e)    //For some reason this seems to tick twice every other tick
         {
